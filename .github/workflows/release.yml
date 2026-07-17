@@ -1,0 +1,44 @@
+name: Release Library
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set release version
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+    - name: Build Library Zip
+      run: |
+        # Package the repository as a ZIP suitable for Arduino import
+        zip -r VietnameseOLED.zip . -x ".git*" ".github*" "build*" "CMakeCache.txt" "CMakeFiles*"
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ env.RELEASE_VERSION }}
+        release_name: Release ${{ env.RELEASE_VERSION }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset (ZIP)
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./VietnameseOLED.zip
+        asset_name: VietnameseOLED-${{ env.RELEASE_VERSION }}.zip
+        asset_content_type: application/zip

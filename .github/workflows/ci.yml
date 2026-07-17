@@ -1,0 +1,76 @@
+name: Build and Test CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  native-tests:
+    name: Native Unit Tests (Linux)
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Configure CMake
+      run: cmake -B build -DVOLED_BUILD_TESTS=ON
+
+    - name: Build tests
+      run: cmake --build build --config Release
+
+    - name: Run unit test suite
+      run: ./build/voled_tests
+
+  arduino-compilation:
+    name: Arduino Library Compilation
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        board:
+          - fqbn: "arduino:avr:uno"
+            sketch: "examples/ArduinoUNO_SSD1306_Basic/ArduinoUNO_SSD1306_Basic.ino"
+          - fqbn: "arduino:avr:mega"
+            sketch: "examples/ArduinoMega_SSD1306_Full/ArduinoMega_SSD1306_Full.ino"
+          - fqbn: "esp32:esp32:esp32"
+            sketch: "examples/ESP32_SSD1306_Demo/ESP32_SSD1306_Demo.ino"
+          - fqbn: "esp8266:esp8266:nodemcuv2"
+            sketch: "examples/ESP8266_SSD1306_HelloVN/ESP8266_SSD1306_HelloVN.ino"
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+
+    - name: Install platform cores
+      run: |
+        arduino-cli core update-index
+        if [ "${{ matrix.board.fqbn }}" == "esp32:esp32:esp32" ]; then
+          arduino-cli config init
+          arduino-cli config set board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+        elif [ "${{ matrix.board.fqbn }}" == "esp8266:esp8266:nodemcuv2" ]; then
+          arduino-cli config init
+          arduino-cli config set board_manager.additional_urls http://arduino.esp8266.com/stable/package_esp8266com_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp8266:esp8266
+        else
+          # AVR core
+          arduino-cli core install arduino:avr
+        fi
+
+    - name: Install library dependencies
+      run: |
+        # Create libraries directory and link this repository
+        mkdir -p "$HOME/Arduino/libraries"
+        ln -s "$GITHUB_WORKSPACE" "$HOME/Arduino/libraries/VietnameseOLED"
+
+    - name: Compile Arduino Sketch
+      run: |
+        arduino-cli compile --fqbn ${{ matrix.board.fqbn }} ${{ matrix.board.sketch }}

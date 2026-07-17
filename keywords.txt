@@ -1,0 +1,118 @@
+#######################################
+# Syntax Coloring Map for VietnameseOLED
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+VietnameseOLED	KEYWORD1
+DisplayAdapter	KEYWORD1
+SSD1306Adapter	KEYWORD1
+SH1106Adapter	KEYWORD1
+SH1107Adapter	KEYWORD1
+SSD1327Adapter	KEYWORD1
+FontEngine	KEYWORD1
+FontManager	KEYWORD1
+GlyphCache	KEYWORD1
+GlyphRenderer	KEYWORD1
+BitmapRenderer	KEYWORD1
+LayoutEngine	KEYWORD1
+WordWrapper	KEYWORD1
+TextAlignment	KEYWORD1
+TextEngine	KEYWORD1
+UTF8Decoder	KEYWORD1
+UnicodeMapper	KEYWORD1
+VNFont	KEYWORD1
+VNGlyphInfo	KEYWORD1
+VNGlyphEntry	KEYWORD1
+VNUnicodeEntry	KEYWORD1
+VNRect	KEYWORD1
+VNPoint	KEYWORD1
+VNColor	KEYWORD1
+VNAlign	KEYWORD1
+VNVAlign	KEYWORD1
+VNRenderMode	KEYWORD1
+VNTextWrap	KEYWORD1
+VNCommInterface	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+begin	KEYWORD2
+clear	KEYWORD2
+update	KEYWORD2
+setFont	KEYWORD2
+setColor	KEYWORD2
+setAlign	KEYWORD2
+setVAlign	KEYWORD2
+setTextWrap	KEYWORD2
+setLineSpacing	KEYWORD2
+setRenderMode	KEYWORD2
+setScale	KEYWORD2
+setRotation	KEYWORD2
+setMirror	KEYWORD2
+setCursor	KEYWORD2
+getCursorX	KEYWORD2
+getCursorY	KEYWORD2
+drawUTF8	KEYWORD2
+printVN	KEYWORD2
+printlnVN	KEYWORD2
+printfVN	KEYWORD2
+drawPixel	KEYWORD2
+drawBitmap	KEYWORD2
+fillRect	KEYWORD2
+drawLine	KEYWORD2
+setContrast	KEYWORD2
+displayOn	KEYWORD2
+displayOff	KEYWORD2
+getWidth	KEYWORD2
+getHeight	KEYWORD2
+getTextWidth	KEYWORD2
+getTextHeight	KEYWORD2
+getTextBounds	KEYWORD2
+measureText	KEYWORD2
+registerFont	KEYWORD2
+setCurrentFont	KEYWORD2
+getCurrentFont	KEYWORD2
+getGlyph	KEYWORD2
+getCharWidth	KEYWORD2
+getLineHeight	KEYWORD2
+setViewport	KEYWORD2
+setPadding	KEYWORD2
+setMargin	KEYWORD2
+setParagraphSpacing	KEYWORD2
+decode	KEYWORD2
+getCodepoint	KEYWORD2
+reset	KEYWORD2
+decodeString	KEYWORD2
+findGlyphIndex	KEYWORD2
+isVietnamese	KEYWORD2
+renderGlyph	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+
+VN_COLOR_BLACK	LITERAL1
+VN_COLOR_WHITE	LITERAL1
+VN_COLOR_INVERSE	LITERAL1
+VN_ALIGN_LEFT	LITERAL1
+VN_ALIGN_CENTER	LITERAL1
+VN_ALIGN_RIGHT	LITERAL1
+VN_ALIGN_JUSTIFY	LITERAL1
+VN_VALIGN_TOP	LITERAL1
+VN_VALIGN_MIDDLE	LITERAL1
+VN_VALIGN_BOTTOM	LITERAL1
+VN_RENDER_TRANSPARENT	LITERAL1
+VN_RENDER_OVERWRITE	LITERAL1
+VN_RENDER_INVERT	LITERAL1
+VN_WRAP_NONE	LITERAL1
+VN_WRAP_WORD	LITERAL1
+VN_WRAP_CHARACTER	LITERAL1
+VN_COMM_I2C	LITERAL1
+VN_COMM_SPI	LITERAL1
+Font_5x8_VN	LITERAL1
+Font_8x16_VN	LITERAL1
+Font_16x16_VN	LITERAL1

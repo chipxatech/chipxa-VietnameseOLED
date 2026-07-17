@@ -1,0 +1,31 @@
+# Build directories
+build/
+bin/
+obj/
+
+# IDE files
+.vscode/
+.idea/
+*.suo
+*.user
+*.workspace
+*.project
+*.cproject
+
+# Compilations and binaries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+
+# Temporary and system files
+.DS_Store
+Thumbs.db
+*.tmp
+*.log
